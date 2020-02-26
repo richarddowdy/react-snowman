@@ -43,6 +43,7 @@ function Snowman({maxWrong, images, words}) {
   function generateButtons() {
     return "abcdefghijklmnopqrstuvwxyz".split("").map(ltr => (
       <button
+        data-testid={ltr}
         key={ltr}
         value={ltr}
         onClick={handleGuess}
@@ -56,9 +57,11 @@ function Snowman({maxWrong, images, words}) {
   /** render: render game */
   return (
     <div className="Snowman">
-      <img src={images[nWrong]}/>
-      <p className="Snowman-word">{guessedWord()}</p>
-      <p>{generateButtons()}</p>
+
+      <img data-testid="snowmanImage" src={images[nWrong]} alt={`Image ${nWrong}`}/>
+      <p>Number Wrong: {nWrong}</p>
+      <p data-testid="guessedWord" className="Snowman-word">{guessedWord()}</p>
+      <p data-testid="buttons">{nWrong > 5 ? "<span data-testid='lose'>YOU LOSE</span>" : generateButtons()}</p> 
     </div>
   );
 }
